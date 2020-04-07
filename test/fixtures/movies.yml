@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  year: 1
+  released: 2020-04-08
+  runtime: MyString
+  director: MyString
+  plot: MyText
+  language: MyString
+  metascore: 
+  imdb_rating: 
+
+two:
+  title: MyString
+  year: 1
+  released: 2020-04-08
+  runtime: MyString
+  director: MyString
+  plot: MyText
+  language: MyString
+  metascore: 
+  imdb_rating: 
