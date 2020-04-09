@@ -1,0 +1,40 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+
+<<<<<<< HEAD
+Vue.use(VueRouter);
+=======
+Vue.use(VueRouter)
+>>>>>>> origin
+
+  const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/login',
+    name: 'Login',
+<<<<<<< HEAD
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/resetPassword/:token',
+    component: () => import('../views/ResetPassword.vue')
+  }
+];
+=======
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+  }
+]
+>>>>>>> origin
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+
+export default router
