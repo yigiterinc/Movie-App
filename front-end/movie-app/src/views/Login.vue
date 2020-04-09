@@ -23,7 +23,8 @@
                   <v-spacer></v-spacer>
                   <v-btn v-on:click="this.resetForm"
                          color="light-blue" class="white--text" outlined>Clear</v-btn>
-                  <v-btn color="light-blue darken-1" class="white--text">Login</v-btn>
+                  <v-btn v-on:click="login()"
+                          color="light-blue darken-1" class="white--text">Login</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
@@ -35,8 +36,12 @@
 </template>
 
 <script>
+  import ServicesMixin from '../mixins/services-mixin'
+  import { mapActions } from 'vuex'
 
   export default {
+    name: 'Login',
+    mixins: [ServicesMixin],
     data() {
       return {
         email: '',
@@ -44,9 +49,26 @@
       }
     },
     methods: {
+      ...mapActions(['loginAction']),
+
       resetForm: function () {
         this.email = '';
         this.password = '';
+      },
+      login: function () {
+        const userDetails = {
+          email: this.email,
+          password: this.password
+        }
+
+        this.$store.dispatch('loginAction', userDetails).then(() => {
+            this.resetForm()
+            this.$swal('Please wait', 'You are successfully logged in', 'success');
+            this.$router.push('/')
+        }).catch(() => {
+          this.$swal('Error', 'Please check your credentials', 'error')
+          this.resetForm()
+        })
       }
     }
   }

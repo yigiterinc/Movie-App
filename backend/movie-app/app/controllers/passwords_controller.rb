@@ -10,7 +10,7 @@ class PasswordsController < ApplicationController
 
     if user.present?
       user.generate_password_token!
-      ForgotPasswordMailer.forgot_password_email(user).deliver_now
+      ForgotPasswordMailer.forgot_password_email(user, user.reset_password_token).deliver_now
       # SEND EMAIL WITH TOKEN
     else
       render json: { error: [
