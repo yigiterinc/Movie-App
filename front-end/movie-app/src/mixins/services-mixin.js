@@ -10,28 +10,26 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 export default {
     data() {
         return {
-            SERVICES_ENDPOINT: 'https://localhost:3000',
-            LOGIN_ENDPOINT: this.SERVICES_ENDPOINT + '/user/authenticate'
+            SERVICES_ENDPOINT: 'http://localhost:3000',
+            USERS_ENDPOINT: this.SERVICES_ENDPOINT + '/users'
         }
     },
     methods: {
-        authenticateUser: (email, password) => {
-            console.log('hello')
-            return new Promise((resolve, reject) => {
-                const postEndpoint = this.LOGIN_ENDPOINT + '?email=' + email
-                                            + '&password=' + password;
+        register: function (name, email, password) {
+            const url = this.SERVICES_ENDPOINT + '/users'
+            const data = {
+                user: {
+                    name: name,
+                    email: email,
+                    password: password
+                }
+            }
 
-                axios.post(postEndpoint).then(response => {
-                    const token = response.data.auth_token;
-                    const user = response.data.user;
-                    const resolveData = {token, user};
-                    console.log(resolveData)
-                    resolve(resolveData)
-                }).catch(error => {
-                    console.log('fucked up')
-                    reject(error)
-                })
-            })
+            return new Promise((resolve, reject) => { axios.post(url, data).then(() => {
+                resolve()
+            }).catch(error => {
+                reject(error)
+            })})
         }
     }
 }

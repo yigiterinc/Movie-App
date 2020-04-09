@@ -27,6 +27,11 @@ export const store = new Vuex.Store({
             state.loginStatus = 'failure'
             state.token = ''
             state.user = {}
+        },
+        logout(state) {
+            state.user = ''
+            state.token = ''
+            state.loginStatus = ''
         }
     },
     actions: {
@@ -59,7 +64,12 @@ export const store = new Vuex.Store({
                    reject()
                })
            })
-      }
+      },
+
+      logout({ commit }) {
+          commit('logout')
+          localStorage.removeItem('token')
+       }
     },
     getters: {
         isLoggedIn: state => state.loginStatus === 'success',
