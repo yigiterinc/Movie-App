@@ -13,13 +13,9 @@ Vue.use(VueRouter);
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
-  },
-  {
-    path: '/resetPassword/:token',
-    component: () => import('../views/ResetPassword.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   }
-];
+]
 
 const router = new VueRouter({
   mode: 'history',
