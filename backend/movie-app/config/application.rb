@@ -26,6 +26,8 @@ module MovieApp
 
     config.autoload_paths << Rails.root.join('lib')
 
+    Tmdb::Api.key('b0af84324ea41ca39f4311c9156e94e3')
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

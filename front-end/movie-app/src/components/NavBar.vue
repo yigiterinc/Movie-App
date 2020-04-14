@@ -1,10 +1,6 @@
 <template>
-    <v-app-bar
-            app
-            dark
-    >
+    <v-app-bar app dark>
         <div class="d-flex align-center">
-
             <h1><router-link to="/" class="remove-link-styles">Cinephile</router-link></h1>
         </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_124225) do
+ActiveRecord::Schema.define(version: 2020_04_13_191804) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
@@ -41,13 +41,14 @@ ActiveRecord::Schema.define(version: 2020_04_09_124225) do
     t.integer "year"
     t.date "released"
     t.string "runtime"
-    t.string "director"
     t.text "plot"
     t.string "language"
-    t.float "metascore"
-    t.float "imdb_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "vote_average"
+    t.integer "revenue"
+    t.string "poster_path"
+    t.integer "budget"
   end
 
   create_table "stars", force: :cascade do |t|
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_124225) do
     t.string "photo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "gender"
   end
 
   create_table "user_genres", force: :cascade do |t|
