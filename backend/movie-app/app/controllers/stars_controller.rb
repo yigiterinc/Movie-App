@@ -1,4 +1,5 @@
 class StarsController < ApplicationController
+  skip_before_action :authenticate_request
 
   def index
     render json: { response: Star.all }, status: 200
