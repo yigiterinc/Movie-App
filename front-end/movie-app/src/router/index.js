@@ -35,6 +35,11 @@ const routes = [
     path: '/stars',
     name: 'Stars',
     component: () => import('../views/Stars.vue')
+  },
+  {
+    path: '/resetPassword/:token',
+    name: 'ForgotPassword',
+    component: () => import('../views/ResetPassword.vue')
   }
 ]
 

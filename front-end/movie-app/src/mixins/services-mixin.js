@@ -99,6 +99,20 @@ export default {
             return this.get(url)
         },
 
+        forgotPassword: function (email) {
+            const url = this.SERVICES_ENDPOINT + '/password/forgot'
+                            + '?email=' + email
+
+            return this.post(url)
+        },
+
+        resetPassword: function (token, password) {
+            const url = this.SERVICES_ENDPOINT + '/password/reset'
+                        + '?token=' + token + '&password=' + password
+
+            return this.post(url)
+        },
+
         get: function (endpoint) {
             return new Promise ((resolve, reject) => {
                 Vue.axios.get(endpoint).then(response => {

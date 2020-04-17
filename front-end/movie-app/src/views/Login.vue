@@ -23,7 +23,10 @@
                       <v-col class="d-flex" cols="12" sm="6" xsm="12">
                       </v-col>
                       <v-spacer></v-spacer>
-                      <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
+                      <v-col cols="3" align-end>
+                        <p :disabled="!valid" @click="forgotPass" class="forgot">Forgot your password?</p>
+                      </v-col>
+                      <v-col class="d-flex" cols="9" sm="3" xsm="12" align-end>
                         <v-btn x-large block :disabled="!valid" color="primary" @click="validate"> Login </v-btn>
                       </v-col>
                     </v-row>
@@ -147,6 +150,16 @@
           this.$swal('Error', 'Something went wrong while registering you please try again', 'error')
         })
       },
+      forgotPass: function () {
+        this.forgotPassword(this.loginEmail).then((response) => {
+          console.log(response)
+          this.$swal('Success', 'You will receive an email about password reset', 'success')
+          this.$router.push('/')
+        }).catch(error => {
+          this.$swal('Error', 'Something went wrong', 'error')
+          console.error(error)
+        })
+      },
       validate: function () {
         if (this.$refs.loginForm.validate()) {
           this.login()
@@ -167,3 +180,10 @@
     },
   }
 </script>
+
+<style>
+  .forgot {
+    cursor:pointer;
+    color:blue;
+  }
+</style>
