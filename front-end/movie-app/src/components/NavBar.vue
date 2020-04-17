@@ -4,17 +4,31 @@
             <h1><router-link to="/" class="remove-link-styles">Cinephile</router-link></h1>
         </div>
 
+        <div class="left-aligned-links">
+            <v-btn to="/stars" text>
+                Stars
+            </v-btn>
+
+            <v-btn to="/genres" text>
+                Genres
+            </v-btn>
+        </div>
+
         <v-spacer></v-spacer>
 
-        <v-btn to="/" text>
-            Home
-        </v-btn>
-        <v-btn v-if="!isLoggedIn" to="/login" text>
-            Login
-        </v-btn>
-        <v-btn v-else text v-on:click="logoutAndAlert">
-            Log out
-        </v-btn>
+        <div v-if="!isLoggedIn">
+            <v-btn to="/login" text>
+                Login
+            </v-btn>
+        </div>
+        <div v-else>
+            <v-btn text :to="getProfileRoute()">
+                Profile
+            </v-btn>
+            <v-btn text @click="logoutAndAlert">
+                Log out
+            </v-btn>
+        </div>
     </v-app-bar>
 </template>
 
@@ -30,6 +44,9 @@
             logoutAndAlert: function() {
                 this.$swal('Info', 'Logged out', 'info')
                 this.logout()
+            },
+            getProfileRoute: function () {
+                return '/profile/' + this.$store.getters.id
             }
         },
 
@@ -40,12 +57,16 @@
 </script>
 
 <style scoped lang="scss">
-.remove-link-styles {
-    text-decoration: none;
-    color: #1ba0c3;
-
-    :visited {
+    .remove-link-styles {
+        text-decoration: none;
         color: #1ba0c3;
+
+        :visited {
+            color: #1ba0c3;
+        }
     }
-}
+
+    .left-aligned-links {
+        margin-left: 2vw;
+    }
 </style>

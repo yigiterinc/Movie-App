@@ -11,6 +11,7 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 export const store = new Vuex.Store({
     state: {
         user: {},
+        following: {},
         token: localStorage.getItem('token') || '',
         loginStatus: null   // Login state
     },
@@ -18,10 +19,18 @@ export const store = new Vuex.Store({
         loading (state) {
             state.loginStatus = 'loading'
         },
-        loginSuccess(state, { token, user }) {
+        saveGenre (state, genre) {
+            state.following.genres.push(genre)
+        },
+        loginSuccess(state, { token, user, followedMovies, followedGenres, followedStars }) {
             state.loginStatus = 'success'
             state.token = token
             state.user = user
+            state.following = {
+                movies: followedMovies,
+                genres: followedGenres,
+                stars: followedStars
+            }
         },
         loginFailure(state) {
             state.loginStatus = 'failure'
@@ -45,9 +54,13 @@ export const store = new Vuex.Store({
                axios.post(postEndpoint).then(response => {
                    const token = response.data.auth_token;
                    const user = response.data.user;
+                   const followedMovies = response.data.followed_movies
+                   const followedGenres = response.data.followed_genres
+                   const followedStars = response.data.followed_stars
 
                    if (response.status == 200) {
-                       commit('loginSuccess', { token, user })
+                       commit('loginSuccess',
+                                { token, user, followedMovies, followedGenres, followedStars })
                        localStorage.setItem('token', token)
                        axios.defaults.headers.common['Authorization'] = token
                        console.log('success')
@@ -72,9 +85,12 @@ export const store = new Vuex.Store({
        }
     },
     getters: {
+        user: state => state.user,
         isLoggedIn: state => state.loginStatus === 'success',
         name: state => state.user.name,
         email: state => state.user.email,
-        token: state => state.token
+        id: state => state.user.id,
+        token: state => state.token,
+        following: state => state.following
     }
 });
